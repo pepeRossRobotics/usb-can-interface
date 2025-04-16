@@ -398,3 +398,46 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#  C++ build artifacts
+*.o
+*.obj
+*.so
+*.a
+*.out
+*.exe
+*.dll
+*.dylib
+*.lo
+*.la
+*.gch
+*.pch
+
+# ROS (ROS1 & ROS2)
+build/
+devel/
+install/
+log/
+logs/
+
+# ROS2 colcon
+colcon_install/
+.colcon/
+.colcon_install_layout
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# ROS launch/params
+*.launch~
+*.yaml~
+*.param~
+*.rviz
+
+# Misc
+*.swp
+*.bak
+*~
