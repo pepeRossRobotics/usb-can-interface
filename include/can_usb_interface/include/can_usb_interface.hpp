@@ -41,6 +41,9 @@ public:
     void set_debug(bool enable);
     bool is_debug() const;
 
+    static int checksum(std::span<const uint8_t> data);
+    static bool is_complete(const std::vector<uint8_t>& buf);
+
 private:
     std::string device_;
     int baudrate_;
@@ -52,8 +55,6 @@ private:
     std::mutex send_mutex_;
     std::mutex recv_mutex_;
 
-    static int checksum(std::span<const uint8_t> data);
-    static bool is_complete(const std::vector<uint8_t>& buf);
     void log(const std::string& msg) const;
     bool send_settings();
 };

@@ -26,5 +26,18 @@ target_link_libraries(can_usb_test
     pthread
 )
 
+# Find GoogleTest
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+
+# Add test executable
 enable_testing()
-# Tests can be added here in future
+
+add_executable(test_can_usb
+    test/test_can_usb_interface.cpp
+    ${CMAKE_SOURCE_DIR}/src/can_usb_interface.cpp
+)
+target_include_directories(test_can_usb PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(test_can_usb GTest::gtest_main pthread)
+add_test(NAME CanUsbTests COMMAND test_can_usb)

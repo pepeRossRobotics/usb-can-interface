@@ -92,3 +92,24 @@ Example:
 | 12         | 5,000        |
 
 ---
+
+## 🧪 Testing
+
+### Unit Tests
+
+To run the unit tests for the USB CAN interface:
+
+```bash
+cd can_usb_interface
+mkdir -p build && cd build
+cmake .. -DBUILD_TESTING=ON
+make
+ctest
+```
+
+### Notes
+
+- These tests use [GoogleTest](https://github.com/google/googletest).
+- Tests simulate logical behavior (checksum, frame parsing).
+- No USB hardware required — system calls are safely ignored or simulated.
+- Ideal for CI pipelines or development without hardware.
