@@ -47,3 +47,9 @@ Run it with
 ```
 candump vcan0
 ```
+
+
+
+
+
+I now need help fully refactoring the USB CAN Analyzer tool. I have the same requirements as the socket_can_interface. I would like to have an interface for the USB device that uses the latest c++ 20 features that can help me make this a non blocking read write device for a real time system. below is the code that I have
