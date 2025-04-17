@@ -1,5 +1,5 @@
-#ifndef TERMIOS2_FALLBACK_HPP
-#define TERMIOS2_FALLBACK_HPP
+// termios2_fallback.hpp
+#pragma once
 
 #ifndef TCGETS2
 #define TCGETS2 0x802C542A
@@ -17,5 +17,3 @@ struct termios2 {
   unsigned int c_ospeed;
 };
 #endif
-
-#endif // TERMIOS2_FALLBACK_HPP

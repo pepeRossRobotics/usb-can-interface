@@ -1,55 +1,60 @@
-# usb-can-interface
-Code to interface the USB-CAN Analyzer so that we can use it to develop and debug stuff
+# CAN USB ↔ SocketCAN Bridge
 
-This code is heavily based on the work from https://github.com/kobolt/usb-can
+A real-time bridge utility between USB CAN Analyzer and a SocketCAN interface written in C++20.
 
+---
 
-## Instructions
-For this to work we need to install Socket CAN
-```
-sudo apt-get update
-sudo apt-get install can-utils
-```
+## 🔌 Features
 
-Then we need to create a virtual CAN interface
-```
-sudo modprobe vcan
-sudo ip link add dev vcan0 type vcan
-sudo ip link set up vcan0
-```
+- Bidirectional forwarding between USB-CAN (serial) and SocketCAN
+- Command-line configurable
+- Thread-safe, real-time friendly
+- CAN 2.0 and CAN FD support
 
-After this if you run `ifconfig` you should have this device:
-```
-vcan0: flags=193<UP,RUNNING,NOARP>  mtu 72
-        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-```
+---
 
-Now compile the code with:
-```
-gcc -o tty_can_bridge tty_can_bridge.c
+## 🧰 Requirements
+
+- Linux with CAN and serial support
+- `libstdc++` with C++20
+- `argparse` C++ header (or replace with manual parsing)
+
+---
+
+## ⚙️ Build
+
+```bash
+mkdir build && cd build
+cmake ..
+make
 ```
 
-Run it with:
-```
-./tty_can_bridge /dev/ttyUSB0 vcan0
-```
+---
 
-To check the output use candump. If you dont have it installed does it with:
-```
-sudo apt install can-utils
+## 🚀 Run
+
+```bash
+./can_bridge [OPTIONS]
 ```
 
-Run it with
+### Options
+
+| Option       | Description                              | Default         |
+|--------------|------------------------------------------|-----------------|
+| `--usb`      | USB serial device path                   | `/dev/ttyUSB0`  |
+| `--iface`    | SocketCAN interface name                 | `vcan0`         |
+| `--baudrate` | Serial baudrate                          | `2000000`       |
+| `--speed`    | CAN speed enum (1 = 1Mbps, etc.)         | `1`             |
+| `--fd`       | Enable CAN FD                            | `false`         |
+| `--debug`    | Enable logging                           | `false`         |
+| `--help`     | Show help message                        |                 |
+
+---
+
+## 📚 Example
+
+```bash
+./can_bridge --usb /dev/ttyUSB0 --iface vcan0 --debug --fd
 ```
-candump vcan0
-```
 
-
-
-
-
-I now need help fully refactoring the USB CAN Analyzer tool. I have the same requirements as the socket_can_interface. I would like to have an interface for the USB device that uses the latest c++ 20 features that can help me make this a non blocking read write device for a real time system. below is the code that I have
+This bridges messages between a USB-CAN analyzer and a virtual CAN interface.

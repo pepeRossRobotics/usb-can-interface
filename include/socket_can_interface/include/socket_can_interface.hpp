@@ -1,5 +1,4 @@
-#ifndef SOCKET_CAN_INTERFACE_HPP
-#define SOCKET_CAN_INTERFACE_HPP
+#pragma once
 
 #include <string>
 #include <array>
@@ -56,5 +55,3 @@ private:
     void log(const std::string &message) const;
     bool poll_readable(int timeout_ms) const;
 };
-
-#endif // SOCKET_CAN_INTERFACE_HPP
